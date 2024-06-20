@@ -1,10 +1,16 @@
 #include <iostream>
-#define HELLO "Hello, darice"
-#define N 9
-#define SUM(x, y) x + y
+#include "test/NoteTest.h"
+#include "test/NoteCollectionTest.h"
+#include "test/AppTest.h"
 
 int main() {
-    int n = SUM(1, 2);
-    std::cout << n << std::endl;
+    // std::cout << "Hello, World!" << std::endl;
+
+    //test_note();
+
+    test_collection();
+
+   // test_app();
+
     return 0;
 }

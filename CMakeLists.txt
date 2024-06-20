@@ -4,6 +4,8 @@ project(note_projet_lab)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(note_projet_lab main.cpp
-        Note.cpp
-        Note.h
-        Note.h)
+        src/App.cpp
+        src/Note.cpp
+        src/NoteCollection.cpp
+        src/NoteCollectionObserver.cpp
+)

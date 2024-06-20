@@ -1,6 +1,4 @@
-//
-// Created by darice lorinda dezo simo on 22/04/24.
-//
+
 
 #ifndef NOTE_PROJET_LAB_NOTE_H
 #define NOTE_PROJET_LAB_NOTE_H
@@ -8,34 +6,40 @@
 #include <string>
 #include <ctime>
 #include <mutex>
-
+/**
+ * Class Note
+ * */
 class Note {
 private:
-    std::string title; // titolo della mia note
-    std::string content; // contenuto testuale delle note
-    std::time_t createDate; // data di creazione delle note
-    std::time_t updateDate; // data di aggiornamento delle note
-    bool locked; // il locker delle note
-    // std::mutex lockMutex; // Mutex for thread safety
+    std::string title;
+    std::string content;
+    std::time_t createDate{};
+    std::time_t updateDate{};
+    bool locked{};
+    std::mutex lockMutex; // Mutex for thread safety
 
 public:
-    Note(std::string  title, std::string  content);
+    Note(const std::string&  title, const std::string&  content);
+    Note(const Note& note);
 
-    // Getters
+    Note& operator=(const Note& other);
+
     std::string getTitle() const;
     std::string getContent() const;
     std::time_t getCreateDate() const;
     std::time_t getUpdateDate() const;
     bool isLocked() const;
 
-    // Setters
     void setTitle(const std::string& newTitle);
     void setContent(const std::string& newContent);
     void lock();
     void unlock();
+
+    void printNote() const;
+
+private:
+    static std::string timeToString(std::time_t time) ;
 };
-
-
 
 
 #endif //NOTE_PROJET_LAB_NOTE_H
