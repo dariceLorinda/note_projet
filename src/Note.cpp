@@ -59,7 +59,6 @@ bool Note::isLocked() const {
 
 
 void Note::setTitle(const std::string& newTitle) {
-    std::lock_guard<std::mutex> lock(lockMutex); // Lock the mutex
     if (!locked) {
         title = newTitle;
         updateDate = std::time(nullptr);
@@ -67,7 +66,6 @@ void Note::setTitle(const std::string& newTitle) {
 }
 
 void Note::setContent(const std::string& newContent) {
-    std::lock_guard<std::mutex> lock(lockMutex); // Lock the mutex
     if (!locked) {
         content = newContent;
         updateDate = std::time(nullptr);
@@ -76,12 +74,10 @@ void Note::setContent(const std::string& newContent) {
 
 
 void Note::lock() {
-    std::lock_guard<std::mutex> lock(lockMutex); // Lock the mutex
     locked = true;
 }
 
 void Note::unlock() {
-    std::lock_guard<std::mutex> lock(lockMutex); // Lock the mutex
     locked = false;
 }
 

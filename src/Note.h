@@ -16,7 +16,6 @@ private:
     std::time_t createDate{};
     std::time_t updateDate{};
     bool locked{};
-    std::mutex lockMutex; // Mutex for thread safety
 
 public:
     Note(const std::string&  title, const std::string&  content);
