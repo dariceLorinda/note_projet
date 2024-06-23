@@ -19,6 +19,8 @@ private:
     std::time_t createDate{};
     std::time_t updateDate{};
 
+    static std::string timeToString(std::time_t time);
+
 public:
     explicit NoteCollection(std::string name);
 
@@ -41,8 +43,6 @@ public:
     void getPrintNotes() const;
     void printCollection() const;
 
-private:
-    static std::string timeToString(std::time_t time) ;
 };
 
 

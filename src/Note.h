@@ -17,6 +17,9 @@ private:
     std::time_t updateDate{};
     bool locked{};
 
+    static std::string timeToString(std::time_t time) ;
+
+
 public:
     Note(const std::string&  title, const std::string&  content);
     Note(const Note& note);
@@ -36,9 +39,9 @@ public:
 
     void printNote() const;
 
-private:
-    static std::string timeToString(std::time_t time) ;
-};
+
+
+    };
 
 
 #endif //NOTE_PROJET_LAB_NOTE_H
