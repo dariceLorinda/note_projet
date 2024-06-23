@@ -8,4 +8,5 @@ add_executable(note_projet_lab main.cpp
         src/Note.cpp
         src/NoteCollection.cpp
         src/NoteCollectionObserver.cpp
+        src/NoteModificationException.h
 )

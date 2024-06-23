@@ -1,6 +1,7 @@
 
 
 #include "NoteCollection.h"
+#include "NoteModificationException.h"
 
 #include <utility>
 
@@ -60,6 +61,10 @@ void NoteCollection::addNote(const Note& note) {
 
 void NoteCollection::removeNote(size_t index) {
     if(index < notes.size()) {
+        auto note = notes.at(index);
+        if(note.isLocked()){
+            throw NoteModificationException("this note is locked");
+        }
         notes.erase(notes.begin() + index);
         updateDate = std::time(nullptr);
         notify();
