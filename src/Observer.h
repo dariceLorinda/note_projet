@@ -12,6 +12,7 @@ public:
     // Observer(Observer *pObserver);
 
     virtual void update(NoteCollection& collection) = 0;
+    virtual ~Observer() = default;
 };
 
 
