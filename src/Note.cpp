@@ -12,13 +12,6 @@ Note::Note(const std::string&  title, const std::string&  content)
     updateDate(createDate),
     locked(false) {}
 
-    // Copy constructor
-Note::Note(const Note& other)
-    : title(other.title),
-    content(other.content),
-    createDate(other.createDate),
-    updateDate(other.updateDate),
-    locked(other.locked) {}
 
 // Copy assignment operator
 Note& Note::operator=(const Note& other) {

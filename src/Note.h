@@ -21,8 +21,7 @@ private:
 
 
 public:
-    Note(const std::string&  title, const std::string&  content);
-    Note(const Note& note);
+    Note(const std::string&  title, const std::string&  content)
 
     Note& operator=(const Note& other);
 
