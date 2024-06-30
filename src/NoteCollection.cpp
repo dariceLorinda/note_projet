@@ -49,28 +49,35 @@ void NoteCollection::notify() {
 }
 
 void NoteCollection::setName(const std::string &newName) {
-    name = newName;
-    updateDate = std::time(nullptr);
+    if(!locked) {
+        name = newName;
+        updateDate = std::time(nullptr);
+    }
 }
 
 void NoteCollection::addNote(const Note& note) {
-    NoteCollection::notes.push_back(note);
-    updateDate = std::time(nullptr);
-    notify();
+    if(!locked){
+        NoteCollection::notes.push_back(note);
+        updateDate = std::time(nullptr);
+        notify();
+    }
 }
 
 void NoteCollection::removeNote(size_t index) {
-    if(index < notes.size()) {
-        auto note = notes.at(index);
-        if(note.isLocked()){
-            throw NoteModificationException("this note is locked");
+    if(!locked) {
+        if(index < notes.size()) {
+            auto note = notes.at(index);
+            if(note.isLocked()){
+                throw NoteModificationException("this note is locked");
+            }
+            notes.erase(notes.begin() + index);
+            updateDate = std::time(nullptr);
+            notify();
+        } else {
+            std::cerr << "Invalid index. Note not found." << std::endl;
         }
-        notes.erase(notes.begin() + index);
-        updateDate = std::time(nullptr);
-        notify();
-    } else {
-        std::cerr << "Invalid index. Note not found." << std::endl;
     }
+
 }
 
 std::string NoteCollection::timeToString(std::time_t time) {

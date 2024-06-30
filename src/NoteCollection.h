@@ -18,6 +18,7 @@ private:
     std::vector<Observer*> observers;
     std::time_t createDate{};
     std::time_t updateDate{};
+    bool locked{};
 
     static std::string timeToString(std::time_t time);
 
@@ -27,6 +28,7 @@ public:
     std::string getName() const;
     std::time_t getCreateDate() const;
     std::time_t getUpdateDate() const;
+    bool isLocked() const;
 
     std::vector<Note> getNotes() const;
 
@@ -39,6 +41,8 @@ public:
     void setName(const std::string& newName);
     void addNote(const Note& note);
     void removeNote(size_t index);
+    void lock();
+    void unlock();
 
     void getPrintNotes() const;
     void printCollection() const;
