@@ -94,6 +94,6 @@ NoteCollection App::getDefaultCollection() const {
     return defaultCollection;
 }
 
-NoteCollection App::getCollection(std::string collectionName) const {
+NoteCollection App::getCollection(const std::string& collectionName) const {
     return *collections.at(collectionName);
 }

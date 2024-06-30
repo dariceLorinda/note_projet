@@ -22,7 +22,7 @@ private:
     static std::string timeToString(std::time_t time);
 
 public:
-    explicit NoteCollection(std::string name);
+    explicit NoteCollection( const std::string& name);
 
     std::string getName() const;
     std::time_t getCreateDate() const;

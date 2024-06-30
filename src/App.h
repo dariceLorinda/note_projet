@@ -29,7 +29,7 @@ public:
     void listCollections() const;
    std::string getDefaultCollectionName() const;
    NoteCollection getDefaultCollection()const;
-    NoteCollection getCollection(std::string collectionName)const;
+    NoteCollection getCollection(const std::string& collectionName)const;
 };
 
 

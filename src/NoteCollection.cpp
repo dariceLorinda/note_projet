@@ -5,8 +5,8 @@
 
 #include <utility>
 
-NoteCollection::NoteCollection(std::string name)
-    : name(std::move(name)),
+NoteCollection::NoteCollection(const std::string& name)
+    : name(name),
     createDate(std::time(nullptr)),
     updateDate(createDate) {}
 
