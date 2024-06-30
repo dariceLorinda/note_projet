@@ -10,8 +10,16 @@ NoteCollection::NoteCollection(const std::string& name)
     createDate(std::time(nullptr)),
     updateDate(createDate) {}
 
+
 std::string NoteCollection::getName() const {
     return name;
+}
+Note NoteCollection::getNote(const std::string& note ){
+    for(auto &n : notes){
+        if(n.getTitle() == note)
+            return n;
+    }
+
 }
 
 std::time_t NoteCollection::getCreateDate() const {

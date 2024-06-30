@@ -30,13 +30,23 @@ public:
     std::time_t getUpdateDate() const;
     bool isLocked() const;
 
+
+
+
+
+
     std::vector<Note> getNotes() const;
+    Note getNote(const std::string& note );
+
 
     void attach(Observer *observer) override;
 
     void detach(Observer *observer) override;
-
     void notify() override;
+
+
+
+
 
     void setName(const std::string& newName);
     void addNote(const Note& note);
