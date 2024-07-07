@@ -30,7 +30,7 @@ std::time_t NoteCollection::getUpdateDate() const {
     return updateDate;
 }
 
-std::vector<Note> NoteCollection::getNotes() const {
+std::list<Note> NoteCollection::getNotes() const {
     return notes;
 }
 
@@ -74,11 +74,12 @@ void NoteCollection::addNote(const Note& note) {
 void NoteCollection::removeNote(size_t index) {
     if(!locked) {
         if(index < notes.size()) {
-            auto note = notes.at(index);
-            if(note.isLocked()){
+            auto it = notes.begin();
+            std::advance(it, index);
+            if(it -> isLocked()) {
                 throw NoteModificationException("this note is locked");
             }
-            notes.erase(notes.begin() + index);
+            notes.erase(it);
             updateDate = std::time(nullptr);
             notify();
         } else {

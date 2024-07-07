@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include <list>
 #include <ctime>
 
 #include "Subject.h"
@@ -14,8 +14,8 @@
 class NoteCollection : public Subject {
 private:
     std::string name;
-    std::vector<Note> notes;
-    std::vector<Observer*> observers;
+    std::list<Note> notes;
+    std::list<Observer*> observers;
     std::time_t createDate{};
     std::time_t updateDate{};
     bool locked{};
@@ -35,7 +35,7 @@ public:
 
 
 
-    std::vector<Note> getNotes() const;
+    std::list<Note> getNotes() const;
     Note getNote(const std::string& note );
 
 

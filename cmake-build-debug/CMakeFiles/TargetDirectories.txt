@@ -1,0 +1,3 @@
+/Users/daricelorindadezosimo/note-projet-lab/cmake-build-debug/CMakeFiles/note_projet_lab.dir
+/Users/daricelorindadezosimo/note-projet-lab/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/daricelorindadezosimo/note-projet-lab/cmake-build-debug/CMakeFiles/rebuild_cache.dir
