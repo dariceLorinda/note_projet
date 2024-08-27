@@ -66,7 +66,7 @@ void App::updateCollection(const std::string& collectionName, const std::string&
     if (collections.find(newCollectionName) == collections.end()) {
         auto it = collections.find(collectionName); // puntatore verso la vecchia collezione
         if(it != collections.end()) {
-            collections[newCollectionName] = std::make_unique<NoteCollection>(collectionName); // creo la nuova collezione
+            collections[newCollectionName] = std::make_unique<NoteCollection>(newCollectionName); // creo la nuova collezione
             collections[newCollectionName]->attach(&observer); // ci metto il suo ossevatore
             for (const auto& note : collections.at(collectionName)->getNotes()) {
                 collections[newCollectionName]->addNote(note); // per ogni nota presente nella vecchia collezione, lo aggiunto sulla nuova

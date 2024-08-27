@@ -3,32 +3,22 @@ project(note_projet_lab)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(note_projet_lab main.cpp
-        src/App.cpp
+add_subdirectory(test)
+
+set(SOURCE_FILES
+        src/utils.h
         src/Note.cpp
+        src/Note.h
         src/NoteCollection.cpp
+        src/NoteCollection.h
         src/NoteCollectionObserver.cpp
+        src/NoteCollectionObserver.h
         src/NoteModificationException.h
-        gtest/gtest-assertion-result.h
-        gtest/gtest-death-test.h
-        gtest/gtest-matchers.h
-        gtest/gtest-message.h
-        gtest/gtest-param-test.h
-        gtest/gtest-printers.h
-        gtest/gtest-spi.h
-        gtest/gtest-test-part.h
-        gtest/gtest-typed-test.h
-        gtest/gtest_pred_impl.h
-        gtest/gtest_prod.h
-        gtest/internal/gtest-death-test-internal.h
-        gtest/internal/gtest-filepath.h
-        gtest/internal/gtest-internal.h
-        gtest/internal/gtest-param-util.h
-        gtest/internal/gtest-port.h
-        gtest/internal/gtest-port-arch.h
-        gtest/internal/gtest-string.h
-        gtest/internal/gtest-type-util.h
-        gtest/internal/custom/gtest.h
-        gtest/internal/custom/gtest-port.h
-        gtest/internal/custom/gtest-printers.h
+        src/Observer.h
+        src/Subject.h
+        src/App.cpp
+        src/App.h
 )
+add_executable(note_projet_lab main.cpp)
+add_library(core ${SOURCE_FILES})
+target_link_libraries(note_projet_lab core)

@@ -20,6 +20,7 @@ Note NoteCollection::getNote(const std::string& note ){
             return n;
     }
 
+    return Note("", ""); // TODO: bug da fix
 }
 
 std::time_t NoteCollection::getCreateDate() const {
@@ -57,36 +58,29 @@ void NoteCollection::notify() {
 }
 
 void NoteCollection::setName(const std::string &newName) {
-    if(!locked) {
-        name = newName;
-        updateDate = std::time(nullptr);
-    }
+    name = newName;
+    updateDate = std::time(nullptr);
 }
 
 void NoteCollection::addNote(const Note& note) {
-    if(!locked){
-        NoteCollection::notes.push_back(note);
-        updateDate = std::time(nullptr);
-        notify();
-    }
+    NoteCollection::notes.push_back(note);
+    updateDate = std::time(nullptr);
+    notify();
 }
 
 void NoteCollection::removeNote(size_t index) {
-    if(!locked) {
-        if(index < notes.size()) {
-            auto it = notes.begin();
-            std::advance(it, index);
-            if(it -> isLocked()) {
-                throw NoteModificationException("this note is locked");
-            }
-            notes.erase(it);
-            updateDate = std::time(nullptr);
-            notify();
-        } else {
-            std::cerr << "Invalid index. Note not found." << std::endl;
+    if(index < notes.size()) {
+        auto it = notes.begin();
+        std::advance(it, index);
+        if(it -> isLocked()) {
+            throw NoteModificationException("this note is locked");
         }
+        notes.erase(it);
+        updateDate = std::time(nullptr);
+        notify();
+    } else {
+        std::cerr << "Invalid index. Note not found." << std::endl;
     }
-
 }
 
 std::string NoteCollection::timeToString(std::time_t time) {
