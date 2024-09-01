@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 
 #if __cplusplus < 201402L
@@ -9,7 +7,7 @@
 #include "App.h"
 
 App::App(const std::string& defaultCollectionName)
-    : defaultCollection(defaultCollectionName) {
+        : defaultCollection(defaultCollectionName) {
     defaultCollection.attach(&observer);
     collections[defaultCollectionName] = std::make_unique<NoteCollection>(defaultCollectionName);
 }
@@ -26,9 +24,9 @@ void App::addNoteToCollection(const std::string& collectionName, const std::stri
     }
 }
 
-void App::removeNoteFromCollection(const std::string& collectionName, size_t index) {
+void App::removeNoteFromCollection(const std::string& collectionName, const std::string& noteTitle) {
     if (collections.find(collectionName) != collections.end()) {
-        collections[collectionName]->removeNote(index);
+        collections[collectionName]->removeNote(noteTitle);
     } else {
         std::cerr << "Collection " << collectionName << " does not exist." << std::endl;
     }
@@ -87,7 +85,7 @@ void App::listCollections() const {
     }
 }
 std::string App::getDefaultCollectionName() const{
-   return defaultCollection.getName();
+    return defaultCollection.getName();
 }
 
 NoteCollection App::getDefaultCollection() const {

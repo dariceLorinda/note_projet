@@ -50,7 +50,7 @@ TEST(AppTest, RemoveNoteFromCollectionTest) {
     app.addNoteToCollection("New Collection", "Title 1", "Content 1");
     app.addNoteToCollection("New Collection", "Title 2", "Content 2");
 
-    app.removeNoteFromCollection("New Collection", 0);
+    app.removeNoteFromCollection("New Collection", "Title 1");
 
     auto collection = app.getCollection("New Collection");
     auto notes = collection.getNotes();

@@ -1,5 +1,3 @@
-
-
 #ifndef NOTE_PROJET_LAB_NOTE_COLLECTION_H
 #define NOTE_PROJET_LAB_NOTE_COLLECTION_H
 
@@ -20,6 +18,7 @@ private:
     std::time_t updateDate{};
 
     static std::string timeToString(std::time_t time);
+    int getIndexByTitle(const std::string& title);
 
 public:
     explicit NoteCollection( const std::string& name);
@@ -30,6 +29,7 @@ public:
 
     std::list<Note> getNotes() const;
     Note getNote(const std::string& note );
+    size_t getNumNotes() const;
 
     void attach(Observer *observer) override;
 
@@ -38,7 +38,7 @@ public:
 
     void setName(const std::string& newName);
     void addNote(const Note& note);
-    void removeNote(size_t index);
+    void removeNote(const std::string& title);
 
     void printCollection() const;
 

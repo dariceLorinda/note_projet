@@ -1,14 +1,12 @@
-
-
 #include "NoteCollection.h"
 #include "NoteModificationException.h"
 
 #include <utility>
 
 NoteCollection::NoteCollection(const std::string& name)
-    : name(name),
-    createDate(std::time(nullptr)),
-    updateDate(createDate) {}
+        : name(name),
+          createDate(std::time(nullptr)),
+          updateDate(createDate) {}
 
 
 std::string NoteCollection::getName() const {
@@ -35,6 +33,10 @@ std::list<Note> NoteCollection::getNotes() const {
     return notes;
 }
 
+size_t NoteCollection::getNumNotes() const {
+    return notes.size();
+}
+
 void NoteCollection::attach(Observer *observer) {
     observers.push_back(observer);
 }
@@ -45,16 +47,16 @@ void NoteCollection::detach(Observer *observer) {
                     observers.begin(),
                     observers.end(),
                     observer
-                    ),
-                    observers.end()
-            );
+            ),
+            observers.end()
+    );
     updateDate = std::time(nullptr);
 }
 
 void NoteCollection::notify() {
     for (auto observer : observers) {
-            observer->update(*this);
-        }
+        observer->update(*this);
+    }
 }
 
 void NoteCollection::setName(const std::string &newName) {
@@ -68,8 +70,20 @@ void NoteCollection::addNote(const Note& note) {
     notify();
 }
 
-void NoteCollection::removeNote(size_t index) {
-    if(index < notes.size()) {
+int NoteCollection::getIndexByTitle(const std::string& title) {
+    int index = 0;
+    for (auto it = notes.begin(); it != notes.end(); ++it, ++index) {
+        if (it->getTitle() == title) {
+            return index;
+        }
+    }
+
+    return -1;
+}
+
+void NoteCollection::removeNote(const std::string& title) {
+    int index = getIndexByTitle(title);
+    if(index >= 0) {
         auto it = notes.begin();
         std::advance(it, index);
         if(it -> isLocked()) {

@@ -1,5 +1,3 @@
-
-
 #ifndef NOTE_PROJET_LAB_APP_H
 #define NOTE_PROJET_LAB_APP_H
 
@@ -21,14 +19,14 @@ public:
 
     void addNote(const std::string& title, const std::string& content);
     void addNoteToCollection(const std::string& collectionName, const std::string& title, const std::string& content);
-    void removeNoteFromCollection(const std::string& collectionName, size_t index);
+    void removeNoteFromCollection(const std::string& collectionName, const std::string& noteTitle);
     void printNotesFromCollection(const std::string& collectionName) const;
     void printAllNotes() const;
     void createCollection(const std::string& collectionName);
     void updateCollection(const std::string& collectionName, const std::string& newCollectionName);
     void listCollections() const;
-   std::string getDefaultCollectionName() const;
-   NoteCollection getDefaultCollection()const;
+    std::string getDefaultCollectionName() const;
+    NoteCollection getDefaultCollection()const;
     NoteCollection getCollection(const std::string& collectionName)const;
 };
 

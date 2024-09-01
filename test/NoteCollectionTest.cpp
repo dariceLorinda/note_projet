@@ -2,6 +2,7 @@
 
 #include "../src/NoteCollection.h"
 #include "../src/NoteCollectionObserver.h"
+#include "../src/NoteModificationException.h"
 
 // Test del costruttore
 TEST(NoteCollectionTest, ConstructorTest) {
@@ -26,10 +27,9 @@ TEST(NoteCollectionTest, AddNoteTest) {
     Note note("Test Title", "Test Content");
     collection.addNote(note);
 
-    auto notes = collection.getNotes();
-    ASSERT_EQ(notes.size(), 1);
-    EXPECT_EQ(notes.front().getTitle(), "Test Title");
-    EXPECT_EQ(notes.front().getContent(), "Test Content");
+    ASSERT_EQ(collection.getNumNotes(), 1);
+    EXPECT_EQ(collection.getNote("Test Title").getTitle(), "Test Title");
+    EXPECT_EQ(collection.getNote("Test Title").getContent(), "Test Content");
     // EXPECT_NE(collection.getUpdateDate(), collection.getCreateDate());
 }
 
@@ -41,12 +41,33 @@ TEST(NoteCollectionTest, RemoveNoteTest) {
     collection.addNote(note1);
     collection.addNote(note2);
 
-    collection.removeNote(0);
+    ASSERT_EQ(collection.getNumNotes(), 2);
 
-    auto notes = collection.getNotes();
-    ASSERT_EQ(notes.size(), 1);
-    EXPECT_EQ(notes.front().getTitle(), "Title 2");
-    EXPECT_EQ(notes.front().getContent(), "Content 2");
+    collection.removeNote("Title 1");
+
+    ASSERT_EQ(collection.getNumNotes(), 1);
+    EXPECT_EQ(collection.getNote("Title 2").getTitle(), "Title 2");
+    EXPECT_EQ(collection.getNote("Title 2").getContent(), "Content 2");
+}
+
+// Test rimorsione di una note blocata
+TEST(NoteCollectionTest, RemoveNoteBlockTest) {
+    NoteCollection collection("Test Collection");
+    Note note1("Title 1", "Content 1");
+    note1.lock();
+    Note note2("Title 2", "Content 2");
+    collection.addNote(note1);
+    collection.addNote(note2);
+
+    ASSERT_EQ(collection.getNumNotes(), 2);
+
+    try {
+        collection.removeNote("Title 1");
+    } catch( const NoteModificationException& e ) {
+
+    }
+
+    ASSERT_EQ(collection.getNumNotes(), 2);
 }
 
 // Test observer notification
