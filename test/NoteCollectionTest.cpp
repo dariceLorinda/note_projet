@@ -61,11 +61,7 @@ TEST(NoteCollectionTest, RemoveNoteBlockTest) {
 
     ASSERT_EQ(collection.getNumNotes(), 2);
 
-    try {
-        collection.removeNote("Title 1");
-    } catch( const NoteModificationException& e ) {
-
-    }
+    ASSERT_THROW(collection.removeNote("Title 1"),NoteModificationException);
 
     ASSERT_EQ(collection.getNumNotes(), 2);
 }
